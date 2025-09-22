@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Lottery Authority (NLA)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+        }
+        
+        /* Header and Navigation */
+        header {
+            background: linear-gradient(135deg, #0a2463, #3e92cc);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+            margin-right: 15px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #FFD700;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            background-color: #FFD700;
+            color: #000;
+        }
+        
+        /* Section Styling */
+        section {
+            display: none;
+            padding: 40px 0;
+            min-height: 80vh;
+        }
+        
+        section.active {
+            display: block;
+        }
+        
+        /* Home Section */
+        .slideshow-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+        
+        .slide {
+            display: none;
+            position: relative;
+        }
+        
+        .slide.active {
+            display: block;
+            animation: fadeIn 1.5s;
+        }
+        
+        .slide img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+        
+        .slide-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .slide-text h2 {
+            color: #FFD700;
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px #000;
+        }
+        
+        .slide-text p {
+            color: #fff;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        
+        .slide-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dot.active {
+            background-color: #FFD700;
+        }
+        
+        /* Registration Section */
+        .registration-container {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 3px solid #3e92cc;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .registration-container::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.5;
+            animation: glowing 20s linear infinite;
+        }
+        
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+        
+        .registration-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .registration-title .welcome {
+            font-family: 'Dancing Script', cursive;
+            font-size: 48px;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .registration-title .nla-reg {
+            font-size: 36px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: -10px;
+            text-shadow: 0 0 10px #3e92cc, 0 0 20px #3e92cc, 0 0 30px #3e92cc;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #FFD700;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #3e92cc;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .payment-info {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border-left: 5px solid #FFD700;
+        }
+        
+        .payment-info h3 {
+            color: #FFD700;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .payment-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .payment-detail {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .payment-detail span {
+            font-weight: 600;
+            color: #FFD700;
+        }
+        
+        .verify-payment {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+        
+        .verify-payment input {
+            flex: 1;
+            margin-right: 15px;
+        }
+        
+        .verify-btn {
+            background-color: #FFD700;
+            color: #000;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .verify-btn:hover {
+            background-color: #ffed4e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #FFD700, #ffed4e);
+            color: #000;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.4);
+        }
+        
+        .submit-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* About Us Section */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .contact-info, .prominent-figures {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid #3e92cc;
+        }
+        
+        .contact-info h2, .prominent-figures h2 {
+            color: #FFD700;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #FFD700;
+            padding-bottom: 10px;
+        }
+        
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-item i {
+            font-size: 24px;
+            color: #FFD700;
+            margin-right: 15px;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .figures-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .figure-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .figure-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .figure-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .figure-card p {
+            padding: 15px;
+            text-align: center;
+            font-style: italic;
+            color: #FFD700;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #0a2463, #3e92cc);
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        footer p {
+            font-size: 14px;
+            color: #FFD700;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0.4; }
+            to { opacity: 1; }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .slide img {
+                height: 300px;
+            }
+            
+            .slide-text h2 {
+                font-size: 22px;
+            }
+            
+            .slide-text p {
+                font-size: 16px;
+            }
+            
+            .registration-title .welcome {
+                font-size: 36px;
+            }
+            
+            .registration-title .nla-reg {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <!-- REPLACE LOGO1: Replace "logo1" with your actual logo image file name -->
+                    <img src="logo1.png" alt="NLA Logo">
+                    <h1>National Lottery Authority</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="nav-link" data-section="home">Home</a></li>
+                        <li><a href="#" class="nav-link" data-section="registration">Registration</a></li>
+                        <li><a href="#" class="nav-link" data-section="about">About Us</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="active">
+        <div class="container">
+            <div class="slideshow-container">
+                <!-- Slide 1: REPLACE back1 with your image -->
+                <div class="slide active">
+                    <div style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('back 1.png'); background-size: cover; height: 500px; display: flex; align-items: center; justify-content: center;">
+                        <div class="slide-text">
+                            <h2>Responsible Gaming Commitment</h2>
+                            <p>The NLA is committed to the World Lottery Association (WLA) Principles on Responsible Gaming. Responsible Gaming is the lottery sector's most critical element of Corporate Social Responsibility.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 2: REPLACE back2 with your image -->
+                <div class="slide">
+                    <div style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('back 2.png'); background-size: cover; height: 500px; display: flex; align-items: center; justify-content: center;">
+                        <div class="slide-text">
+                            <h2>Don't Miss Your Chance</h2>
+                            <p>"Well, you can't win the lottery if you don't have a ticket" - Andy Gray. Don't miss this opportunity to win big.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 3: REPLACE back3 with your image -->
+                <div class="slide">
+                    <div style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('back 3.png'); background-size: cover; height: 500px; display: flex; align-items: center; justify-content: center;">
+                        <div class="slide-text">
+                            <h2>Discover the Excitement</h2>
+                            <p>Discover the excitement of winning with the National Lottery Authority! Play today and change your life forever.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 4: REPLACE back4 with your image -->
+                <div class="slide">
+                    <div style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('back4.png'); background-size: cover; height: 500px; display: flex; align-items: center; justify-content: center;">
+                        <div class="slide-text">
+                            <h2>You're Just a Ticket Away</h2>
+                            <p>Here is where the money is. You are just a ticket away, simply play and win! Play today and change your life forever.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide-nav">
+                <span class="dot active" data-slide="0"></span>
+                <span class="dot" data-slide="1"></span>
+                <span class="dot" data-slide="2"></span>
+                <span class="dot" data-slide="3"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="registration">
+        <div class="container">
+            <div class="registration-container">
+                <div class="registration-title">
+                    <div class="welcome">Welcome to</div>
+                    <div class="nla-reg">NLA REGISTRATION</div>
+                </div>
+                
+                <form id="registration-form">
+                    <div class="form-group">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" name="fullname" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" min="18" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="occupation">Occupation</label>
+                        <input type="text" id="occupation" name="occupation" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email (Optional)</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="payment-info">
+                        <h3>Payment Information</h3>
+                        <p>Please make a payment of GHS 10 via Mobile Money to complete your registration.</p>
+                        
+                        <div class="payment-details">
+                            <div class="payment-detail">
+                                <span>Payment Mode:</span> Mobile Money (MoMo)
+                            </div>
+                            <div class="payment-detail">
+                                <span>Number:</span> 0599298808
+                            </div>
+                            <div class="payment-detail">
+                                <span>Name:</span> KWASIVI AHIABU
+                            </div>
+                            <div class="payment-detail">
+                                <span>Reference:</span> NLAreg
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="verify-payment">
+                        <input type="text" id="verify-input" placeholder="Enter 'paid' after making payment" required>
+                        <button type="button" class="verify-btn" id="verify-btn">Verify Payment</button>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="submit-btn" disabled>Submit Registration</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about">
+        <div class="container">
+            <div class="about-container">
+                <div class="contact-info">
+                    <h2>Contact Us</h2>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i>📞</i>
+                            <div>
+                                <strong>Phone:</strong> +233599298808
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i>✉️</i>
+                            <div>
+                                <strong>Email:</strong> reg.nla.gh@gmail.com
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i>🏢</i>
+                            <div>
+                                <strong>Address:</strong> National Lottery Authority Headquarters, Accra, Ghana
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="prominent-figures">
+                    <h2>Prominent Figures</h2>
+                    <div class="figures-grid">
+                        <!-- REPLACE about1 with your image -->
+                        <div class="figure-card">
+                            <img src="about1.jpeg" alt="prominentfigure.jpg">
+                            <p>Director General</p>
+                        </div>
+                        <!-- REPLACE about2 with your image -->
+                        <div class="figure-card">
+                            <img src="about2.jpeg" alt="prominentfigure1.jpg">
+                            <p>Head of Operations</p>
+                        </div>
+                        <!-- REPLACE about3 with your image -->
+                        <div class="figure-card">
+                            <img src="about3.jpeg" alt="prominentfigure2.jpg">
+                            <p>Finance Director</p>
+                        </div>
+                        <!-- REPLACE about4 with your image -->
+                        <div class="figure-card">
+                            <img src="about4.jpg" alt="about6.jpeg">
+                            <p>Marketing Director</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 National Lottery Authority. All Rights Reserved. | Responsible Gaming is Our Priority</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetSection = this.getAttribute('data-section');
+                
+                // Hide all sections
+                document.querySelectorAll('section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // Show target section
+                document.getElementById(targetSection).classList.add('active');
+                
+                // Update active nav link
+                document.querySelectorAll('.nav-link').forEach(navLink => {
+                    navLink.style.backgroundColor = '';
+                    navLink.style.color = '';
+                });
+                
+                this.style.backgroundColor = '#FFD700';
+                this.style.color = '#000';
+            });
+        });
+        
+        // Slideshow functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            currentSlide = (n + slides.length) % slides.length;
+            
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSlide(index);
+            });
+        });
+        
+        // Auto advance slides
+        setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 5000);
+        
+        // Registration form functionality
+        const verifyBtn = document.getElementById('verify-btn');
+        const verifyInput = document.getElementById('verify-input');
+        const submitBtn = document.getElementById('submit-btn');
+        
+        verifyBtn.addEventListener('click', function() {
+            if (verifyInput.value.toLowerCase() === 'paid') {
+                alert('Payment verified successfully! You can now submit your registration.');
+                submitBtn.disabled = false;
+            } else {
+                alert('Wrong verification! Please enter "paid" after making the payment.');
+                verifyInput.value = '';
+                verifyInput.focus();
+            }
+        });
+        
+        // Form submission
+        document.getElementById('registration-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const registrationData = {};
+            
+            for (let [key, value] of formData.entries()) {
+                registrationData[key] = value;
+            }
+            
+            // In a real application, you would send this data to a server
+            // For this example, we'll just display it
+            console.log('Registration Data:', registrationData);
+            
+            // Show success message
+            alert('Registration submitted successfully! Thank you for registering with NLA.');
+            
+            // Reset form
+            this.reset();
+            submitBtn.disabled = true;
+        });
+    </script>
+</body>
+</html> 
